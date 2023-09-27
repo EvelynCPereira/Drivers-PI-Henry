@@ -33,8 +33,8 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-// DriverModel();
-// TeamsModel();
+// DriverModel(sequelize);
+// TeamsModel(sequelize);
 
 const { Driver, Team } = sequelize.models;
 Driver.belongsToMany(Team, { through: "driver_team" });
