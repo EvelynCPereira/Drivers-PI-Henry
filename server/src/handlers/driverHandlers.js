@@ -1,6 +1,7 @@
 const { createDriver } = require("../controllers/postDriverController");
 const { getDriversController } = require("../controllers/getDriversController");
 const { getNameController } = require("../controllers/getNameController");
+const getIdController = require("../controllers/getIdController");
 const getDriversHandler = async (req, res) => {
   try {
     const { name } = req.query;
@@ -16,8 +17,16 @@ const getDriversHandler = async (req, res) => {
   }
 };
 
-const getDetailHandler = (req, res) => {
-  res.status(200).send("Aqui esta el detail");
+const getDetailHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (id) {
+      const getId = await getIdController(id);
+      res.status(200).json(getId);
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };
 
 const postDriversHandler = async (req, res) => {
