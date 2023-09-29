@@ -2,8 +2,8 @@ const axios = require("axios");
 const { Sequelize } = require("sequelize");
 const Op = Sequelize.Op;
 const addImage = require("../helpers/addImage");
-const apiUrl = "http://localhost:5000/drivers";
 const { Driver } = require("../db");
+const apiUrl = "http://localhost:5000/drivers";
 
 const getNameController = async (name) => {
   const response = await axios.get(`${apiUrl}`);
@@ -15,6 +15,7 @@ const getNameController = async (name) => {
   const filteredDB = await Driver.findAll({
     where: { surname: { [Op.iLike]: `%${nameToLower}%` } },
   });
+
   if (filteredDrivers.length === 0 && filteredDB.length === 0) {
     throw Error("No se encontraron drivers.");
   }

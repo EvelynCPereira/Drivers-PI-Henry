@@ -1,4 +1,6 @@
 const axios = require("axios");
+const { Sequelize } = require("sequelize");
+const Op = Sequelize.Op;
 const { Driver } = require("../db");
 const apiUrl = "http://localhost:5000/drivers";
 
@@ -24,7 +26,7 @@ const getIdController = async (id) => {
   } else {
     console.log("Requering from the DB");
     const driverDB = await Driver.findOne({
-      where: { id: id },
+      where: { id: { [Op.iLike]: `%${id}%` } },
     });
     return driverDB;
   }
