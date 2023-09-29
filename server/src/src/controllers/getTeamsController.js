@@ -10,6 +10,7 @@
 //     const response = await axios.get(`${apiUrl}`);
 
 //     let teams = [];
+
 //     response.data.map((team) => teams.push(team.teams));
 
 //     teams = teams

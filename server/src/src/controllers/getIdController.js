@@ -1,5 +1,7 @@
 const axios = require("axios");
-const { Driver, driver_team, Team } = require("../db");
+const { Sequelize } = require("sequelize");
+const Op = Sequelize.Op;
+const { Driver } = require("../db");
 const apiUrl = "http://localhost:5000/drivers";
 
 const getIdController = async (id) => {
@@ -22,16 +24,10 @@ const getIdController = async (id) => {
     };
     return driver;
   } else {
+    console.log("Requering from the DB");
     const driverDB = await Driver.findOne({
-      where: { id: id },
+      where: { id: { [Op.iLike]: `%${id}%` } },
     });
-    const drivTeamDb = await driver_team.findOne({
-      where: { id: driverDB.id },
-    });
-
-    const teamDB = await Team.findAll({ where: { id: drivTeamDb.idteam } });
-
-    //
     return driverDB;
   }
 };

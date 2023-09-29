@@ -9,6 +9,6 @@ const getNameTeamController = async (name) => {
   if (filteredDB.length === 0) {
     throw Error("No se encontró team.");
   }
-  return [...filteredDB.slice(0, 15)];
+  return [...filteredDB.slice(0, 50)];
 };
 module.exports = { getNameTeamController };
