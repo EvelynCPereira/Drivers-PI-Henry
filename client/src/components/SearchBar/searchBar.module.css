@@ -1,0 +1,13 @@
+.inputSearch {
+  width: 200px;
+}
+
+.containerSearch .btnSearch {
+  background-color: var(--primary-color);
+  margin-left: 1rem;
+}
+
+.containerSearch .btnSearch:hover {
+  box-shadow: 1px 1px 8px 1px rgb(141, 5, 5);
+  transition: 3ms;
+}

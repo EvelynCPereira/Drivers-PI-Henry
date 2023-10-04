@@ -1,0 +1,13 @@
+.containerPaginado {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 1rem 0;
+}
+.containerPaginado button {
+  padding: 0.5rem;
+}
+
+button.active {
+  background-color: var(--primary-color);
+}

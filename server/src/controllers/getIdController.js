@@ -1,5 +1,7 @@
 const axios = require("axios");
 const { Driver, driver_team, Team } = require("../db");
+const { Sequelize } = require("sequelize");
+const Op = Sequelize.Op;
 const apiUrl = "http://localhost:5000/drivers";
 
 const getIdController = async (id) => {
@@ -25,14 +27,22 @@ const getIdController = async (id) => {
     const driverDB = await Driver.findOne({
       where: { id: id },
     });
-    const drivTeamDb = await driver_team.findOne({
-      where: { id: driverDB.id },
-    });
+    if (driverDB) {
+      const driverTeams = await driver_team.findAll({
+        where: { DriverId: driverDB.id },
+      });
+      const teamIds = driverTeams.map((team) => team.TeamId);
+      const teamDB = await Team.findAll({
+        where: { id: { [Op.in]: teamIds } },
+      });
+      const teamString = teamDB.map((team) => team.teamName).join(", ");
 
-    const teamDB = await Team.findAll({ where: { id: drivTeamDb.idteam } });
-
-    //
-    return driverDB;
+      const driverWithTeamName = {
+        ...driverDB.toJSON(),
+        teamName: teamString,
+      };
+      return driverWithTeamName;
+    }
   }
 };
 

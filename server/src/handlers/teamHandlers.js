@@ -10,7 +10,7 @@ const getTeamsHandler = async (req, res) => {
       res.status(200).json(filteredDrivers);
     } else {
       const allTeams = await getTeamsController();
-      res.status(200).json("Teams guardados exitosamente en base de datos");
+      res.status(200).json(allTeams);
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
