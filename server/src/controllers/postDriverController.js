@@ -57,6 +57,6 @@ const createDriver = async (
       return newDriver;
     }
     return newDriver;
-  } else throw Error("Ya existe el driver");
+  }
 };
 module.exports = { createDriver };

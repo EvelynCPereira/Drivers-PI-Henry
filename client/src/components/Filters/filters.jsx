@@ -3,17 +3,18 @@ import { useEffect } from "react";
 import {
   getDrivers,
   getTeams,
-  filterByTeam,
-  filterByOrder,
-  filterByDOB,
-  filterDataRoute,
-  setPaginationPage,
+  filterByTeams,
+  filterByData,
+  sortBySurname,
+  sortByAge,
+  setPage,
+  resetAux,
 } from "../../redux/actions/actions";
 
 import styles from "./filters.module.css";
 
 const Filters = () => {
-  const teams = useSelector((state) => state.teams);
+  const teams = useSelector((state) => state.allTeams);
   const dispatch = useDispatch();
   const sortedTeams = teams
     .slice()
@@ -21,40 +22,39 @@ const Filters = () => {
   useEffect(() => {
     dispatch(getTeams());
   }, []);
-
   const handleTeamsFilter = (event) => {
     const team = event.target.value;
-    dispatch(filterByTeam(team));
+    dispatch(filterByTeams(team));
   };
 
   const handleOrderBy = (event) => {
     const { value } = event.target;
-    dispatch(filterByOrder(value));
+    dispatch(sortBySurname(value));
   };
 
   const handleOrderDOB = (event) => {
     const { value } = event.target;
-    dispatch(filterByDOB(value));
+    dispatch(sortByAge(value));
   };
 
   const handleDataRoute = (event) => {
     const { value } = event.target;
     // setDataRouteFilter(value)
-    dispatch(filterDataRoute(value));
-    dispatch(setPaginationPage(1));
+    dispatch(filterByData(value));
+    dispatch(setPage(1));
   };
 
   const handleReset = () => {
-    dispatch(setPaginationPage(1));
+    dispatch(setPage(1));
     dispatch(getDrivers());
-    dispatch(filterDataRoute(""));
+    dispatch(resetAux());
 
     document.getElementById("teamsFilter").selectedIndex = 0;
     document.getElementById("orderByFilter").selectedIndex = 0;
     document.getElementById("orderDOBFIlter").selectedIndex = 0;
     document.getElementById("dataRouteFilter").selectedIndex = 0;
 
-    dispatch(filterByTeam([]));
+    dispatch(filterByTeams([]));
   };
 
   return (
@@ -65,7 +65,7 @@ const Filters = () => {
           defaultValue={"default"}
           onChange={handleTeamsFilter}
         >
-          <option value="default">-Teams-</option>
+          <option value="default">Teams</option>
           {sortedTeams?.map((team) => (
             <option key={team.id} value={team.teamName}>
               {team.teamName}
@@ -78,7 +78,7 @@ const Filters = () => {
           defaultValue={"default"}
           onChange={handleOrderBy}
         >
-          <option value="default">-Orden-</option>
+          <option value="default">Order</option>
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
         </select>
@@ -88,9 +88,9 @@ const Filters = () => {
           defaultValue={"default"}
           onChange={handleOrderDOB}
         >
-          <option value="default">-DOB-</option>
-          <option value="asc">Mayor a menor</option>
-          <option value="desc">Menor a mayor</option>
+          <option value="default">DOB</option>
+          <option value="asc">Older to younger</option>
+          <option value="desc">Younger to older</option>
         </select>
 
         <select
@@ -99,9 +99,9 @@ const Filters = () => {
           onChange={handleDataRoute}
         >
           <option value="">-Data Route-</option>
-          <option value="all">All</option>
-          <option value="api">API</option>
-          <option value="database">Database</option>
+          <option value="All">All</option>
+          <option value="Api">API</option>
+          <option value="DataBase">Database</option>
         </select>
 
         <button onClick={handleReset} className={`btn btnPrimary`}>

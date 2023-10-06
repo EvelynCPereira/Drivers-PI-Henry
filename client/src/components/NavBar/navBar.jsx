@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import SearchBar from "../SearchBar/SearchBar";
+//import SearchBar from "../SearchBar/SearchBar";
 import styles from "./navBar.module.css";
 const NavBar = () => {
   return (
@@ -16,7 +16,6 @@ const NavBar = () => {
             CREATE DRIVER
           </Link>
         </div>
-        <SearchBar />
       </nav>
     </div>
   );

@@ -1,4 +1,4 @@
-.Link {
+.link {
   color: inherit;
   text-decoration: none;
   border-radius: 10px;
@@ -7,13 +7,13 @@
   background-color: var(--color-white);
 }
 
-.info {
+.det {
   width: 100%;
   height: 140px;
   padding: 1rem;
 }
 
-.imageContainer img {
+.imageCont img {
   width: 100%;
   height: 240px;
   object-fit: cover;
@@ -21,7 +21,7 @@
   border-radius: 10px 10px 0 0;
 }
 
-.info p {
+.det p {
   font-family: var(--primary-font);
 }
 /* .info span{

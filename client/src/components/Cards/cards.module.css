@@ -1,8 +1,9 @@
-.cardContainer {
+.cardCont {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
   gap: 2rem;
-  margin: 2rem 0;
+  width: 100%;
+  justify-content: center;
 }
 
 .filterContainer {

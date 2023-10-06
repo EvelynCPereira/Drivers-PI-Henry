@@ -4,15 +4,15 @@ import styles from "./card.module.css";
 
 const Card = (props) => {
   return (
-    <Link to={`/detail/${props.id}`} className={styles.Link}>
+    <Link to={`/detail/${props.id}`} className={styles.link}>
       <div className={styles.card}>
-        <div className={styles.imageContainer}>
+        <div className={styles.imageCont}>
           <img
             src={props.image?.url ? props.image?.url : props.image}
-            alt={`imagen del corredor ${props.forename} ${props.surname}`}
+            alt={`driver image ${props.forename} ${props.surname}`}
           />
         </div>
-        <div className={styles.info}>
+        <div className={styles.det}>
           <p>
             Name: <span> {`${props.forename} ${props.surname}`}</span>
           </p>

@@ -1,58 +1,70 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDrivers } from "../../redux/actions/actions";
+import { getDrivers, setPage } from "../../redux/actions/actions";
 import Card from "../Card/card";
 import Pagination from "../Pagination/pagination";
 
 import styles from "./cards.module.css";
 
 function Cards() {
-  const drivers = useSelector((state) => state.drivers);
-  const driversByTeams = useSelector((state) => state.driversByTeams);
-  const dataRouteFilter = useSelector((state) => state.dataRouteFilter);
-  const currentPage = useSelector((state) => state.currentPage);
+  const [perPage, setPerPage] = useState(9);
+  const { allDrivers, aux, page } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const selectDrivers = aux?.length === 0 ? allDrivers : aux;
+  const startIndex = (page - 1) * perPage;
+  const endIndex = perPage * page;
+  const showDrivers = selectDrivers.slice(startIndex, endIndex); //0=> 2-1 *9 = 9
+  const totalPages = Math.ceil(selectDrivers.length / perPage);
 
-  const driversPerPage = 9;
-  const startIndex = (currentPage - 1) * driversPerPage;
-  const endIndex = startIndex + driversPerPage;
+  const handleNext = () => {
+    if (page !== totalPages) {
+      dispatch(setPage(page + 1));
+    }
+  };
 
-  const driversFiltered =
-    driversByTeams.length !== 0
-      ? driversByTeams.slice(startIndex, endIndex).filter((driver) => {
-          if (dataRouteFilter === "") {
-            return true;
-          } else if (dataRouteFilter === "api") {
-            return typeof driver.id === "number";
-          } else if (dataRouteFilter === "database") {
-            return typeof driver.id === "string";
-          } else {
-            return true;
-          }
-        })
-      : drivers.slice(startIndex, endIndex).filter((driver) => {
-          if (dataRouteFilter === "") {
-            return true;
-          } else if (dataRouteFilter === "api") {
-            return typeof driver.id === "number";
-          } else if (dataRouteFilter === "database") {
-            return typeof driver.id === "string";
-          } else {
-            return true;
-          }
-        });
+  const handlePrev = () => {
+    if (page > 1) {
+      dispatch(setPage(page - 1));
+    }
+  };
+  //   const driversFiltered =
+  //     driversByTeams.length !== 0
+  //       ? driversByTeams.slice(startIndex, endIndex).filter((driver) => {
+  //           if (dataRouteFilter === "") {
+  //             return true;
+  //           } else if (dataRouteFilter === "api") {
+  //             return typeof driver.id === "number";
+  //           } else if (dataRouteFilter === "database") {
+  //             return typeof driver.id === "string";
+  //           } else {
+  //             return true;
+  //           }
+  //         })
+  //       : drivers.slice(startIndex, endIndex).filter((driver) => {
+  //           if (dataRouteFilter === "") {
+  //             return true;
+  //           } else if (dataRouteFilter === "api") {
+  //             return typeof driver.id === "number";
+  //           } else if (dataRouteFilter === "database") {
+  //             return typeof driver.id === "string";
+  //           } else {
+  //             return true;
+  //           }
+  //         });
 
   useEffect(() => {
     dispatch(getDrivers());
-  }, [driversByTeams]);
-  console.log(driversFiltered);
-  console.log(driversFiltered.teamName);
-
+  }, []);
   return (
     <div className="container">
-      <Pagination />
-      <div className={styles.cardContainer}>
-        {driversFiltered?.map((driver) => (
+      <Pagination
+        handleNext={handleNext}
+        handlePrev={handlePrev}
+        page={page}
+        totalPages={totalPages}
+      />
+      <div className={styles.cardCont}>
+        {showDrivers?.map((driver) => (
           <Card
             key={driver.id}
             id={driver.id}
@@ -64,9 +76,9 @@ function Cards() {
             }
             dob={driver.dob}
             teams={
-              driver.teams?.split(",").join(", ")
-                ? driver.teams?.split(",").join(", ")
-                : driver.teamName
+              driver.teams
+                ? driver.teams
+                : driver?.Teams?.map((team) => team.teamName).join(", ")
             }
             image={driver.image}
           />
