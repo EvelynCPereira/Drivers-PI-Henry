@@ -6,6 +6,7 @@ const Op = Sequelize.Op;
 const createDriver = async (
   forename,
   surname,
+  image,
   description,
   nationality,
   dob,
@@ -15,14 +16,13 @@ const createDriver = async (
   const toLowForname = forename.toLowerCase();
   const toLowSurname = surname.toLowerCase();
   const toLowNationality = nationality.toLowerCase();
-  const toLowDob = dob.toLowerCase();
 
-  const filteredDB = await Driver.findAll({
+  const filteredDB = await Driver.findOne({
     where: {
       forename: { [Op.iLike]: `%${toLowForname}%` },
       surname: { [Op.iLike]: `%${toLowSurname}%` },
       nationality: { [Op.iLike]: `%${toLowNationality}%` },
-      dob: { [Op.iLike]: `%${toLowDob}%` },
+      dob: dob,
     },
   });
 
@@ -41,8 +41,7 @@ const createDriver = async (
       forename,
       surname,
       description,
-      image:
-        "https://img.freepik.com/foto-gratis/coche-deportivo-brillante-conduciendo-pista-deportiva-iluminada-ia-generativa_188544-53590.jpg",
+      image,
       nationality,
       dob,
       teamName,

@@ -38,10 +38,9 @@ const getTeamsController = async () => {
 
     apiData.forEach((driver) => {
       if (driver.teams) {
-        // {teams:"reanult, ferrari"} --> [reanult],[ferrari]...
         const teamsArr = driver.teams.split(",").map((elem) => elem.trim()); // Divide y elimina espacios
         teamsArr.forEach((teamName) => {
-          cleanTeams.add(teamName); // Agrega el team y no permite que se repita
+          cleanTeams.add(teamName);
         });
       }
     });
@@ -53,7 +52,3 @@ const getTeamsController = async () => {
   return dbTeams;
 };
 module.exports = { getTeamsController };
-
-// module.exports = {
-//   getTeamsController,
-// };

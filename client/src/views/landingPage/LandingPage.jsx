@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-//import styles from "./LandingPage.module.css";
+import styles from "./LandingPage.module.css";
 
 function LandingPage() {
   return (
-    <div>
+    <div className={styles.container}>
       <Link to="/home">
-        <button>HOME</button>
+        <button className={styles.button}>HOME</button>
       </Link>
     </div>
   );

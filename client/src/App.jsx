@@ -5,6 +5,7 @@ import Form from "./views/form/form";
 import Home from "./views/home/home";
 import LandingPage from "./views/landingPage/LandingPage";
 import NavBar from "./components/NavBar/navBar";
+import CustomCursor from "./components/mouse";
 
 import "./App.css";
 
@@ -12,6 +13,7 @@ function App() {
   const location = useLocation();
   return (
     <div>
+      <CustomCursor />
       {location.pathname !== "/" && <NavBar />}
       <Routes>
         <Route path="/" element={<LandingPage />} />

@@ -18,6 +18,7 @@ const getDriversController = async () => {
       },
     ],
   });
+
   return [...allDB, ...allApi];
 };
 module.exports = { getDriversController };

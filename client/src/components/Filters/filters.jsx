@@ -24,6 +24,7 @@ const Filters = () => {
   }, []);
   const handleTeamsFilter = (event) => {
     const team = event.target.value;
+    dispatch(setPage(1));
     dispatch(filterByTeams(team));
   };
 

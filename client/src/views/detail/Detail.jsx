@@ -31,22 +31,22 @@ const Detail = () => {
             Id: <span>{driver.id}</span>
           </h1>
           <h1>
-            Nombre: <span>{driver.forename}</span>
+            Name: <span>{driver.forename}</span>
           </h1>
           <h1>
-            Apellido: <span>{driver.surname}</span>
+            Last name: <span>{driver.surname}</span>
           </h1>
           <h1>
-            Nacionalidad: <span>{driver.nationality}</span>
+            Nationality: <span>{driver.nationality}</span>
           </h1>
           <h1>
-            Nacimiento: <span>{driver.dob}</span>
+            DOB: <span>{driver.dob}</span>
           </h1>
           <h1>
             Teams: <span>{driver.teams ? driver.teams : driver.teamName} </span>
           </h1>
           <h1>
-            Descripción: <p>{driver.description}</p>
+            Description: <p>{driver.description}</p>
           </h1>
         </div>
       </div>

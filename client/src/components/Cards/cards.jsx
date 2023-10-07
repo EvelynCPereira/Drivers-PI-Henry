@@ -27,30 +27,6 @@ function Cards() {
       dispatch(setPage(page - 1));
     }
   };
-  //   const driversFiltered =
-  //     driversByTeams.length !== 0
-  //       ? driversByTeams.slice(startIndex, endIndex).filter((driver) => {
-  //           if (dataRouteFilter === "") {
-  //             return true;
-  //           } else if (dataRouteFilter === "api") {
-  //             return typeof driver.id === "number";
-  //           } else if (dataRouteFilter === "database") {
-  //             return typeof driver.id === "string";
-  //           } else {
-  //             return true;
-  //           }
-  //         })
-  //       : drivers.slice(startIndex, endIndex).filter((driver) => {
-  //           if (dataRouteFilter === "") {
-  //             return true;
-  //           } else if (dataRouteFilter === "api") {
-  //             return typeof driver.id === "number";
-  //           } else if (dataRouteFilter === "database") {
-  //             return typeof driver.id === "string";
-  //           } else {
-  //             return true;
-  //           }
-  //         });
 
   useEffect(() => {
     dispatch(getDrivers());
