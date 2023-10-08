@@ -8,9 +8,19 @@ import styles from "./cards.module.css";
 
 function Cards() {
   const [perPage, setPerPage] = useState(9);
-  const { allDrivers, aux, page } = useSelector((state) => state);
+  // const { allDrivers, aux, page } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const selectDrivers = aux?.length === 0 ? allDrivers : aux;
+  //const selectDrivers = aux?.length === 0 ? allDrivers : aux;
+
+  const { allDrivers, filteredByData, aux, page } = useSelector(
+    (state) => state
+  );
+  const selectDrivers =
+    aux.length > 0
+      ? aux
+      : filteredByData.length > 0
+      ? filteredByData
+      : allDrivers;
   const startIndex = (page - 1) * perPage;
   const endIndex = perPage * page;
   const showDrivers = selectDrivers.slice(startIndex, endIndex); //0=> 2-1 *9 = 9

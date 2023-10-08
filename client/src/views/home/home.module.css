@@ -1,4 +1,5 @@
 .homeBackground {
-  background-color: rgba(192, 1, 19, 1);
+  background: linear-gradient(to top left, #410000, #ef1515);
+
   width: 100%;
 }

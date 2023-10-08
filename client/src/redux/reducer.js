@@ -14,6 +14,7 @@ import {
 } from "./actions/actionsTypes";
 const initialState = {
   allDrivers: [],
+  filteredByData: [],
   copy: [],
   allTeams: [],
   detail: [],
@@ -88,51 +89,38 @@ const rootReducer = (state = initialState, { type, payload }) => {
         aux: order,
       };
     case FILTER_BY_DATA:
-      if (payload === "All") {
-        if (state.aux.length === 0) {
-          console.log("all  " + state.allDrivers);
-          return { ...state, ...state.allDrivers };
+      let filteredData = [];
+      if (payload === "DataBase") {
+        if (state.copy.length === 0) {
+          filteredData = state.allDrivers.filter(
+            (driver) => typeof driver.id !== "number"
+          );
         } else {
-          console.log("all  " + state.aux);
-
-          return { ...state, ...state.aux };
+          filteredData = state.copy.filter(
+            (driver) => typeof driver.id !== "number"
+          );
+          return { ...state, aux: filteredData };
         }
-      } else if (payload === "DataBase") {
-        const db = [];
-        if (state.aux.length === 0) {
-          for (const driver of state.allDrivers) {
-            if (typeof driver.id !== "number") {
-              db.push(driver);
-            }
-          }
-        } else {
-          for (const driver of state.aux) {
-            if (typeof driver.id !== "number") {
-              db.push(driver);
-            }
-          }
-        }
-        console.log("db" + db);
-        return { ...state, aux: db };
       } else if (payload === "Api") {
-        const api = [];
-        if (state.aux.length === 0) {
-          for (const driver of state.allDrivers) {
-            if (typeof driver.id === "number") {
-              api.push(driver);
-            }
-          }
+        if (state.copy.length === 0) {
+          filteredData = state.allDrivers.filter(
+            (driver) => typeof driver.id === "number"
+          );
         } else {
-          for (const driver of state.aux) {
-            if (typeof driver.id === "number") {
-              api.push(driver);
-            }
-          }
+          filteredData = state.copy.filter(
+            (driver) => typeof driver.id === "number"
+          );
+          return { ...state, aux: filteredData };
         }
-        console.log("api " + api);
-
-        return { ...state, aux: api };
+      } else if (payload === "All") {
+        if (state.copy.length === 0) {
+          filteredData = state.allDrivers;
+        } else {
+          filteredData = state.copy;
+          return { ...state, aux: filteredData };
+        }
       }
+      return { ...state, filteredByData: filteredData };
     case FILTER_BY_TEAMS:
       if (state.aux.length === 0) {
         const filterTeam = state.allDrivers.filter((driver) => {
@@ -144,6 +132,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
               .includes(payload);
           }
         });
+        state.copy = filterTeam;
         return { ...state, aux: filterTeam };
       } else {
         const filterTeam = state.aux.filter((driver) => {
@@ -160,6 +149,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         }
         return { ...state, aux: filterTeam };
       }
+
     case SEARCH_NAME:
       return {
         ...state,

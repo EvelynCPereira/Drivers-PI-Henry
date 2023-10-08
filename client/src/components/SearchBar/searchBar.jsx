@@ -8,7 +8,7 @@ const SearchBar = () => {
 
   const handleSearch = () => {
     if (!nameToFilter || !isNaN(nameToFilter))
-      return alert("Ingresa un nombre valido");
+      return alert("Enter a valid name");
     dispatch(searchName(nameToFilter));
   };
 

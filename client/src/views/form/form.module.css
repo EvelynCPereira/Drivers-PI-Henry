@@ -72,14 +72,6 @@ textarea {
   transition: 300ms;
 }
 
-/* .team-checkbox button {
-    width: 3rem;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: var(--color-black);
-    border: none; */
-/* } */
-
 .selectTeams {
   padding: 0.7rem 0;
 }
