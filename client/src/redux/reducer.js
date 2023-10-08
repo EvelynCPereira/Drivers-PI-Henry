@@ -122,7 +122,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
       }
       return { ...state, filteredByData: filteredData };
     case FILTER_BY_TEAMS:
-      if (state.aux.length === 0) {
+      if (state.aux.length === 0 && state.filteredByData.length === 0) {
         const filterTeam = state.allDrivers.filter((driver) => {
           if (driver.teams) {
             return driver.teams?.includes(payload);
@@ -134,7 +134,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         });
         state.copy = filterTeam;
         return { ...state, aux: filterTeam };
-      } else {
+      } else if (state.filteredByData.length === 0) {
         const filterTeam = state.aux.filter((driver) => {
           if (driver.teams) {
             return driver.teams?.includes(payload);
@@ -147,6 +147,22 @@ const rootReducer = (state = initialState, { type, payload }) => {
         if (filterTeam.length === 0) {
           return state;
         }
+        state.copy = filterTeam;
+        return { ...state, aux: filterTeam };
+      } else {
+        const filterTeam = state.filteredByData.filter((driver) => {
+          if (driver.teams) {
+            return driver.teams?.includes(payload);
+          } else if (driver.Teams) {
+            return driver?.Teams?.map((team) => team.teamName)
+              .join(", ")
+              .includes(payload);
+          }
+        });
+        if (filterTeam.length === 0) {
+          return state;
+        }
+        state.copy = filterTeam;
         return { ...state, aux: filterTeam };
       }
 
