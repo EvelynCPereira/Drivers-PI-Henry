@@ -99,9 +99,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
           filteredData = state.copy.filter(
             (driver) => typeof driver.id !== "number"
           );
-          return { ...state, aux: filteredData };
+          if (filteredData.length === 0) {
+            return state;
+          } else return { ...state, aux: filteredData };
         }
       } else if (payload === "Api") {
+        console.log(state.copy);
         if (state.copy.length === 0) {
           filteredData = state.allDrivers.filter(
             (driver) => typeof driver.id === "number"
@@ -110,7 +113,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
           filteredData = state.copy.filter(
             (driver) => typeof driver.id === "number"
           );
-          return { ...state, aux: filteredData };
+          console.log("filtro" + filteredData);
+          if (filteredData.length === 0) {
+            return state;
+          } else return { ...state, aux: filteredData };
         }
       } else if (payload === "All") {
         if (state.copy.length === 0) {
