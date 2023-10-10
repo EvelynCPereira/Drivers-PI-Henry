@@ -1,25 +1,25 @@
 const validations = (form) => {
   const errors = {};
-  if (form.name === "") {
+  if (form.name.trim().length === 0) {
     errors.name = "A name is required";
   } else if (!/^[a-zA-Z ]+$/.test(form.name)) {
     errors.name = "The name cannot contain special characters or numbers.";
   }
 
-  if (form.lastName === "") {
+  if (form.lastName.trim().length === 0) {
     errors.lastName = "A last name is required";
   } else if (!/^[a-zA-Z ]+$/.test(form.lastName)) {
     errors.lastName =
       "The last name cannot contain special characters or numbers";
   }
 
-  if (form.nationality === "") {
+  if (form.nationality.trim().length === 0) {
     errors.nationality = "A nationality is required";
   } else if (!/^[a-zA-Z ]+$/.test(form.nationality)) {
     errors.nationality =
       "Nationality cannot contain special characters or numbers";
   }
-  if (form.image === "") {
+  if (form.image.trim().length === 0) {
     errors.image = "Image URL required";
   } else if (!/\.(jpg|jpeg|png|gif|bmp|svg|webp)$/i.test(form.image)) {
     errors.image = "The URL entered is not a valid image URL";

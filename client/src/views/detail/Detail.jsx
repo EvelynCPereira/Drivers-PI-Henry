@@ -16,7 +16,13 @@ const Detail = () => {
       dispatch(resetDetail());
     };
   }, []);
-
+  if (Object.values(driver).length === 0) {
+    return (
+      <div>
+        <p>Driver not found</p>
+      </div>
+    );
+  }
   return (
     <div className={styles.containerDetail}>
       <div className={`${styles.contentDetail} container`}>

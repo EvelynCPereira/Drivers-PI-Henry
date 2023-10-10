@@ -35,6 +35,7 @@ export const getId = (id) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get(`${URL_API}/drivers/${id}`);
+      console.log(data);
       return dispatch({ type: GET_ID, payload: data });
     } catch (error) {
       console.log(error);

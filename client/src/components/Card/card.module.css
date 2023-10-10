@@ -10,7 +10,7 @@
 .det {
   width: 100%;
   height: 140px;
-  padding: 1rem;
+
 }
 
 .imageCont img {
@@ -24,6 +24,3 @@
 .det p {
   font-family: var(--primary-font);
 }
-/* .info span{
-    
-} */

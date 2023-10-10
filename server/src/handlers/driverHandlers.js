@@ -36,8 +36,8 @@ const postDriversHandler = async (req, res) => {
     const created = await createDriver(
       forename,
       surname,
-      description,
       image,
+      description,
       nationality,
       dob,
       teamName

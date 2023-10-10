@@ -37,7 +37,6 @@ function Cards() {
       dispatch(setPage(page - 1));
     }
   };
-
   useEffect(() => {
     dispatch(getDrivers());
   }, []);

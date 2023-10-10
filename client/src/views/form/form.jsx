@@ -62,20 +62,20 @@ const Form = () => {
     try {
       const arrTeam = selectedTeams.map((team) => team.teamName);
       const teamsOk = arrTeam.join(", ");
-
-      await axios.post(`${URL_API}/drivers`, {
+      const created = await axios.post(`${URL_API}/drivers`, {
         forename: form.name,
         surname: form.lastName,
         description: form.description,
-        nationality: form.nationality,
         image: form.image,
+        nationality: form.nationality,
         dob: form.dob,
         teamName: teamsOk,
       });
+      console.log(created);
       alert("Driver created");
       navigate(-1);
     } catch (error) {
-      alert("That driver already exists");
+      alert(error.response?.data?.error);
     }
   };
 
@@ -101,7 +101,6 @@ const Form = () => {
   useEffect(() => {
     handleValidation();
   }, [form]);
-  console.log(form);
 
   return (
     <div className={styles["form-Container"]}>

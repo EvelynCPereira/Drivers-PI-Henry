@@ -54,7 +54,7 @@ const Filters = () => {
     document.getElementById("orderByFilter").selectedIndex = 0;
     document.getElementById("orderDOBFIlter").selectedIndex = 0;
     document.getElementById("dataRouteFilter").selectedIndex = 0;
-
+    dispatch(filterByData([]));
     dispatch(filterByTeams([]));
   };
 

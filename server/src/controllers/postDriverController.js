@@ -12,17 +12,17 @@ const createDriver = async (
   dob,
   teamName
 ) => {
+  console.log(image);
   const apiUrl = "http://localhost:5000/drivers";
   const toLowForname = forename.toLowerCase();
   const toLowSurname = surname.toLowerCase();
   const toLowNationality = nationality.toLowerCase();
 
-  const filteredDB = await Driver.findOne({
+  const filteredDB = await Driver.findAll({
     where: {
       forename: { [Op.iLike]: `%${toLowForname}%` },
       surname: { [Op.iLike]: `%${toLowSurname}%` },
       nationality: { [Op.iLike]: `%${toLowNationality}%` },
-      dob: dob,
     },
   });
 
@@ -35,13 +35,13 @@ const createDriver = async (
       obj.dob === dob
     );
   });
-
+  console.log(matchingObjects);
   if (matchingObjects.length === 0 && filteredDB.length === 0) {
     const newDriver = await Driver.create({
       forename,
       surname,
-      description,
       image,
+      description,
       nationality,
       dob,
       teamName,
@@ -55,7 +55,6 @@ const createDriver = async (
       const response = await newDriver.addTeam(searchTeam);
       return newDriver;
     }
-    return newDriver;
-  }
+  } else throw new Error("That driver already exists");
 };
 module.exports = { createDriver };
