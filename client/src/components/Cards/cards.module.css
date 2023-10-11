@@ -1,4 +1,5 @@
 .cardCont {
+  border-width: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
   gap: 2rem;
@@ -9,8 +10,4 @@
 .filterContainer {
   display: flex;
   flex-direction: row;
-}
-
-.searchBar {
-  display: flex;
 }

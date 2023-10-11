@@ -1,10 +1,11 @@
 /* Estilo para el cursor personalizado */
 .custom-cursor {
-  cursor: none; /* Oculta el cursor predeterminado */
-  width: 50px; /* Ancho de la imagen del cursor */
-  height: 50px; /* Alto de la imagen del cursor */
-  background-image: url("../assets/cursor3.webp"); /* Ruta a tu imagen de auto de Fórmula 1 */
-  background-size: cover;
+  cursor: none !important; /* Oculta el cursor predeterminado */
+  width: 200px; /* Ancho de la imagen del cursor */
+  height: 100px; /* Alto de la imagen del cursor */
+  background-image: url("../assets/cursor.png"); /* Ruta a tu imagen de auto de Fórmula 1 */
+  background-size: contain;
+  background-repeat: no-repeat;
   position: absolute; /* Coloca el cursor en la posición absoluta */
   pointer-events: none; /* Evita que el cursor personalizado interfiera con los eventos del mouse */
 }

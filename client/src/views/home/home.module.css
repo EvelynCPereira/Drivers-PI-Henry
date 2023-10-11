@@ -1,5 +1,5 @@
 .homeBackground {
-  background: linear-gradient(to top left, #410000, #ef1515);
-
+  background-color: #ebebeb;
   width: 100%;
+  cursor: auto;
 }

@@ -13,7 +13,7 @@ function App() {
   const location = useLocation();
   return (
     <div>
-      <CustomCursor />
+      {location.pathname === "/" && <CustomCursor />}
       {location.pathname !== "/" && <NavBar />}
       <Routes>
         <Route path="/" element={<LandingPage />} />
