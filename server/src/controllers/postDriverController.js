@@ -12,7 +12,6 @@ const createDriver = async (
   dob,
   teamName
 ) => {
-  console.log(image);
   const apiUrl = "http://localhost:5000/drivers";
   const toLowForname = forename.toLowerCase();
   const toLowSurname = surname.toLowerCase();
@@ -35,7 +34,7 @@ const createDriver = async (
       obj.dob === dob
     );
   });
-  console.log(matchingObjects);
+
   if (matchingObjects.length === 0 && filteredDB.length === 0) {
     const newDriver = await Driver.create({
       forename,

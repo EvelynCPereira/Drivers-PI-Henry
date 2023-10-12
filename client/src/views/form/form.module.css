@@ -1,32 +1,37 @@
 .form-Container {
   display: grid;
   gap: 3rem;
-  padding: 2.5rem;
+  padding: 1rem;
   justify-items: center;
+  cursor: auto;
 }
 
 .form-Container label {
   font-family: var(--primary-font);
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   margin-right: 1rem;
 }
 
 .form {
-  padding: 2.5rem;
+  padding: 2rem;
+  padding-top: 1rem;
   border-radius: 10px;
   background-color: #6f6b6b;
   display: grid;
-  height: 50rem;
-  width: 500px;
+  height: auto;
+  width: 400px;
   box-shadow: 1px 1px 8px 1px rgb(0, 0, 0);
 }
 
 .form input {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 
 .error {
-  color: red;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: rgb(253, 5, 5);
+  background-color: rgb(38, 37, 37);
   font-family: sans-serif;
 }
 
@@ -45,10 +50,12 @@ textarea {
 
 .buttonX {
   font-family: var(--primary-font);
-  color: var(--color-white);
+  color: rgb(7, 7, 7);
   background-color: var(--primary-color);
   border: none;
+  font-size: 0.8rem;
   border-radius: 4px;
+  background: linear-gradient(to bottom, #ff0000, #410000);
 }
 
 .buttonX:hover {
@@ -60,22 +67,37 @@ textarea {
   font-family: var(--primary-font);
   font-size: 1.3rem;
   color: var(--color-white);
-  background-color: var(--primary-color);
   border-radius: 4px;
-  width: 10rem;
-  height: 3rem;
-  margin-left: 11rem;
+  width: auto;
+  height: auto;
+  background: linear-gradient(to bottom, #ff0000, #410000);
+  border: solid;
+  text-align: center;
+  margin-left: 15%;
+  margin-right: 15%;
 }
 
 .buttonSubmit:hover {
-  background-color: var(--color-black);
-  transition: 300ms;
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.7);
+
+  transition: 200ms;
 }
 
 .selectTeams {
+  color: white;
   padding: 0.7rem 0;
 }
 
 .selectTeams select {
   margin-bottom: 0.2rem;
+  color: blanchedalmond;
+}
+.teams {
+  background-color: #3b3a3a;
+  margin: 2px;
+  padding-left: 10px;
+  padding-top: 4px;
+  text-align: left;
+  font-size: 0.8rem;
+  height: auto;
 }

@@ -4,7 +4,7 @@ const { getTeamsController } = require("./src/controllers/getTeamsController");
 const PORT = 3001;
 
 conn
-  .sync({ force: true })
+  .sync({ force: false })
   .then(async () => {
     await getTeamsController();
     server.listen(PORT, () => {

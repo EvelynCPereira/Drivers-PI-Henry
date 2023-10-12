@@ -177,8 +177,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         aux: payload,
       };
-    case POST_DRIVER:
-      return { ...state };
+    // case POST_DRIVER:
+    //   return { ...state, payload };
     default:
       return {
         ...state,

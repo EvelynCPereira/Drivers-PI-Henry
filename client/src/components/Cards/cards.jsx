@@ -63,7 +63,9 @@ function Cards() {
             teams={
               driver.teams
                 ? driver.teams
-                : driver?.Teams?.map((team) => team.teamName).join(", ")
+                : driver?.Teams
+                ? driver?.Teams?.map((team) => team.teamName).join(", ")
+                : "No Teams"
             }
             image={driver.image}
           />

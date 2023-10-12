@@ -23,38 +23,36 @@ const Detail = () => {
       </div>
     );
   }
+  //<Link to="/home">
+  //           <h5 className={styles.button}>Back</h5>
+  //         </Link>
   return (
     <div className={styles.containerDetail}>
       <div className={`${styles.contentDetail} container`}>
         <div className={styles.imageContainer}>
-          <Link to="/home">
-            <h5>Back</h5>
-          </Link>
           <img src={driver.image} alt="" className={styles.image} />
         </div>
         <div className={styles.infoContainer}>
-          <h1>
-            Id: <span>{driver.id}</span>
-          </h1>
-          <h1>
-            Name: <span>{driver.forename}</span>
-          </h1>
-          <h1>
-            Last name: <span>{driver.surname}</span>
-          </h1>
-          <h1>
-            Nationality: <span>{driver.nationality}</span>
-          </h1>
-          <h1>
-            DOB: <span>{driver.dob}</span>
-          </h1>
-          <h1>
-            Teams: <span>{driver.teams ? driver.teams : driver.teamName} </span>
-          </h1>
-          <h1>
-            Description: <p>{driver.description}</p>
-          </h1>
+          <h3>Name: {driver.forename}</h3>
+          <h3>Last name: {driver.surname}</h3>
+          <div className={styles.texts}>
+            <h3>Id: {driver.id}</h3>
+            <h3>Nationality: {driver.nationality}</h3>
+            <h3>DOB: {driver.dob}</h3>
+            <h3>
+              Teams:{" "}
+              {driver.teams
+                ? driver.teams
+                : driver.teamName
+                ? driver.teamName
+                : "No teams"}
+            </h3>
+          </div>
         </div>
+        <h3>
+          Description:{" "}
+          {driver.description ? driver.description : "No description"}
+        </h3>
       </div>
     </div>
   );

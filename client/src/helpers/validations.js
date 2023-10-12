@@ -4,6 +4,8 @@ const validations = (form) => {
     errors.name = "A name is required";
   } else if (!/^[a-zA-Z ]+$/.test(form.name)) {
     errors.name = "The name cannot contain special characters or numbers.";
+  } else if (form.name.length > 20) {
+    errors.name = "Cannot contain more than 20 characters";
   }
 
   if (form.lastName.trim().length === 0) {
@@ -11,6 +13,8 @@ const validations = (form) => {
   } else if (!/^[a-zA-Z ]+$/.test(form.lastName)) {
     errors.lastName =
       "The last name cannot contain special characters or numbers";
+  } else if (form.lastName.length > 20) {
+    errors.lastName = "Cannot contain more than 20 characters";
   }
 
   if (form.nationality.trim().length === 0) {
@@ -18,6 +22,8 @@ const validations = (form) => {
   } else if (!/^[a-zA-Z ]+$/.test(form.nationality)) {
     errors.nationality =
       "Nationality cannot contain special characters or numbers";
+  } else if (form.nationality.length > 20) {
+    errors.nationality = "Cannot contain more than 20 characters";
   }
   if (form.image.trim().length === 0) {
     errors.image = "Image URL required";

@@ -2,7 +2,7 @@ import { URL_API } from "../../redux/actions/actionsTypes";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getTeams } from "../../redux/actions/actions";
+import { getTeams, postDriver } from "../../redux/actions/actions";
 import validations from "../../helpers/validations";
 import axios from "axios";
 
@@ -39,7 +39,6 @@ const Form = () => {
 
   const handleTeamsChange = (event) => {
     const selectedTeamId = event.target.value;
-
     const selectedTeam = teams.find((team) => team.id === selectedTeamId);
     setSelectedTeams((prevSelectedTeams) => {
       if (prevSelectedTeams.some((team) => team.id === selectedTeamId)) {
@@ -62,7 +61,7 @@ const Form = () => {
     try {
       const arrTeam = selectedTeams.map((team) => team.teamName);
       const teamsOk = arrTeam.join(", ");
-      const created = await axios.post(`${URL_API}/drivers`, {
+      const newDriver = {
         forename: form.name,
         surname: form.lastName,
         description: form.description,
@@ -70,8 +69,9 @@ const Form = () => {
         nationality: form.nationality,
         dob: form.dob,
         teamName: teamsOk,
-      });
-      console.log(created);
+      };
+      postDriver(newDriver);
+
       alert("Driver created");
       navigate(-1);
     } catch (error) {
@@ -183,7 +183,7 @@ const Form = () => {
         />
 
         <div className={styles.selectTeams}>
-          <label>* Equipos:</label>
+          <label>Equipos:</label>
           <select name="teams" id="" onChange={handleTeamsChange} value="">
             <option value="" disabled>
               Select a team{" "}
@@ -196,11 +196,12 @@ const Form = () => {
           </select>
           <div>
             {selectedTeams.map((teamId) => {
-              const team = teams.find((team) => team.id == teamId);
+              const team = teams.find((elem) => elem.id == teamId.id);
               return (
                 <div className={styles["team-checkbox"]}>
-                  <span>{team?.teamName}</span>
+                  <span className={styles.teams}>{team?.teamName}</span>
                   <button
+                    type="button"
                     className={styles.buttonX}
                     onClick={() => handleRemoveTeam(teamId)}
                   >

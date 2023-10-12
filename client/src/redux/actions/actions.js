@@ -54,15 +54,13 @@ export const getTeams = () => {
   };
 };
 
-export const postDriver = () => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.post(`${URL_API}/drivers`);
-      return dispatch({ typer: POST_DRIVER, payload: data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export const postDriver = async (newDriver) => {
+  try {
+    const created = await axios.post(`${URL_API}/drivers`, newDriver);
+    return getDrivers();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const resetDetail = () => {
