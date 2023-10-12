@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchName } from "../../redux/actions/actions";
 import styles from "./searchBar.module.css";
+import { setPage } from "../../redux/actions/actions";
 const SearchBar = () => {
   const dispatch = useDispatch();
   const [nameToFilter, setNameToFilter] = useState("");
@@ -10,6 +11,7 @@ const SearchBar = () => {
     if (!nameToFilter || !isNaN(nameToFilter))
       return alert("Enter a valid name");
     dispatch(searchName(nameToFilter));
+    dispatch(setPage(1));
   };
 
   const handleChange = (event) => {

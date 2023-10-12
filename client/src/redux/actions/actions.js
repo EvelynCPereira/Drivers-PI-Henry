@@ -57,9 +57,11 @@ export const getTeams = () => {
 export const postDriver = async (newDriver) => {
   try {
     const created = await axios.post(`${URL_API}/drivers`, newDriver);
-    return getDrivers();
+    window.alert("Driver created");
+    getDrivers();
+    return true;
   } catch (error) {
-    console.log(error);
+    window.alert(error?.response?.data?.error);
   }
 };
 

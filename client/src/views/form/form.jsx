@@ -1,10 +1,8 @@
-import { URL_API } from "../../redux/actions/actionsTypes";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getTeams, postDriver } from "../../redux/actions/actions";
 import validations from "../../helpers/validations";
-import axios from "axios";
 
 import styles from "./form.module.css";
 
@@ -58,24 +56,21 @@ const Form = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    try {
-      const arrTeam = selectedTeams.map((team) => team.teamName);
-      const teamsOk = arrTeam.join(", ");
-      const newDriver = {
-        forename: form.name,
-        surname: form.lastName,
-        description: form.description,
-        image: form.image,
-        nationality: form.nationality,
-        dob: form.dob,
-        teamName: teamsOk,
-      };
-      postDriver(newDriver);
-
-      alert("Driver created");
-      navigate(-1);
-    } catch (error) {
-      alert(error.response?.data?.error);
+    const arrTeam = selectedTeams.map((team) => team.teamName);
+    const teamsOk = arrTeam.join(", ");
+    const newDriver = {
+      forename: form.name,
+      surname: form.lastName,
+      description: form.description,
+      image: form.image,
+      nationality: form.nationality,
+      dob: form.dob,
+      teamName: teamsOk,
+    };
+    const res = await postDriver(newDriver);
+    console.log(res);
+    if (res === true) {
+      navigate("/home");
     }
   };
 
@@ -214,14 +209,15 @@ const Form = () => {
         </div>
         {formError.teams && <p className={styles.error}>{formError.teams}</p>}
         <br />
-
-        <button
-          className={styles.buttonSubmit}
-          disabled={disableButton()}
-          type="submit"
-        >
-          Create Driver{" "}
-        </button>
+        {Object.values(formError).length === 0 && (
+          <button
+            className={styles.buttonSubmit}
+            disabled={disableButton()}
+            type="submit"
+          >
+            Create Driver{" "}
+          </button>
+        )}
       </form>
     </div>
   );
